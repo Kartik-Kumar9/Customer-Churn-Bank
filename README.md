@@ -1,6 +1,7 @@
 # Customer Churn Prediction & Analysis System
 
 A comprehensive, end-to-end machine learning web application meticulously designed to predict whether a bank customer is likely to stay or churn. This project encapsulates the complete data science lifecycle—from initial exploratory data analysis (EDA) and rigorous feature engineering to the deployment of robust predictive models via a high-performance FastAPI backend, wrapped in an elegant and responsive web frontend.
+Deplyment : https://churnsight.onrender.com
 
 ---
 
