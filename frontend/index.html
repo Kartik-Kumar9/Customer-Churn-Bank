@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChurnSight</title>
+    <meta name="description" content="Predict customer churn risk with advanced machine learning">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-background"></div>
+    <div class="app-container">
+        <!-- Header / Navbar -->
+        <header class="app-header">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+                <h1>ChurnSight</h1>
+            </div>
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="tab-predict">Predict</button>
+                <button class="tab-btn" data-tab="tab-features">Features</button>
+                <button class="tab-btn" data-tab="tab-about">About</button>
+            </nav>
+        </header>
+
+        <div class="hero">
+            <p>Predict customer churn risk with high-accuracy machine learning engine</p>
+        </div>
+
+        <main>
+            <div class="tab-left-pane">
+                <!-- Predict Tab -->
+                <div id="tab-predict" class="tab-content active">
+                    <!-- Prediction Form -->
+                    <section class="card form-section slide-in-up">
+                        <h2><i class="fas fa-user-edit"></i> Customer Profile</h2>
+                        <form id="prediction-form">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label for="credit_score">Credit Score</label>
+                                    <input type="number" id="credit_score" required min="300" max="900"
+                                        placeholder="e.g. 600">
+                                </div>
+                                <div class="input-group">
+                                    <label for="country">Location</label>
+                                    <select id="country" required>
+                                        <option value="" disabled selected>Select country...</option>
+                                        <option value="France">France</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="Spain">Spain</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="gender">Gender</label>
+                                    <select id="gender" required>
+                                        <option value="" disabled selected>Select gender...</option>
+                                        <option value="1">Male</option>
+                                        <option value="0">Female</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="age">Age</label>
+                                    <input type="number" id="age" required min="18" max="100" placeholder="e.g. 40">
+                                </div>
+                                <div class="input-group">
+                                    <label for="tenure">Tenure (Years)</label>
+                                    <input type="number" id="tenure" required min="0" max="10" placeholder="e.g. 5">
+                                </div>
+                                <div class="input-group">
+                                    <label for="balance">Account Balance ($)</label>
+                                    <input type="number" step="0.01" id="balance" required min="0"
+                                        placeholder="e.g. 50000">
+                                </div>
+                                <div class="input-group">
+                                    <label for="products_number">Number of Products</label>
+                                    <input type="number" id="products_number" required min="1" max="4"
+                                        placeholder="e.g. 1">
+                                </div>
+                                <div class="input-group">
+                                    <label for="estimated_salary">Estimated Salary ($)</label>
+                                    <input type="number" step="0.01" id="estimated_salary" required min="0"
+                                        placeholder="e.g. 60000">
+                                </div>
+
+                                <div class="checkbox-container">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" id="credit_card">
+                                        <span class="checkmark"></span>
+                                        Has Credit Card
+                                    </label>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" id="active_member">
+                                        <span class="checkmark"></span>
+                                        Active Member
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary" id="predict-btn">
+                                    <span>Analyze Risk</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+
+                            <div id="loading" class="hidden">
+                                <div class="spinner"></div>
+                                <span>Processing with AI...</span>
+                            </div>
+                        </form>
+
+                        <!-- Prediction Result -->
+                        <div id="result-container" class="hidden fade-in">
+                            <div class="result-card" id="result-card-inner">
+                                <h3>Prediction Result</h3>
+                                <div class="risk-circle" id="risk-circle">
+                                    <span id="prob-value">0%</span>
+                                </div>
+                                <div class="risk-badge" id="risk-badge">Unknown</div>
+                                <p class="prediction-text" id="prediction-text">Analysis complete.</p>
+
+                                <!-- Local Customer Risk Chart -->
+                                <div class="chart-container"
+                                    style="height: 250px; margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+                                    <canvas id="localRadarChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Features Tab -->
+                <div id="tab-features" class="tab-content">
+                    <section class="card slide-in-up">
+                        <h2><i class="fas fa-list-alt"></i> Model Features Explained</h2>
+                        <p class="section-desc">Understanding the data points used to evaluate customer churn risk.</p>
+
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <h3>Credit Score</h3>
+                                <p>A numerical expression based on a level analysis of a person's credit files,
+                                    representing the creditworthiness of an individual. A higher score typically
+                                    indicates lower churn risk as financially stable customers tend to be more loyal.
+                                </p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Location</h3>
+                                <p>The country where the customer resides. Significant demographic or economic
+                                    differences between countries can influence overall banking satisfaction and
+                                    available alternatives.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Gender</h3>
+                                <p>The gender of the customer. Used as a demographic variable to understand if churn
+                                    patterns vary between male and female customer segments.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Age</h3>
+                                <p>Customer's age in years. Older customers generally have more stable banking
+                                    relationships, whereas younger customers might be more likely to switch for better
+                                    offers.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Tenure</h3>
+                                <p>The number of years the customer has been with the bank. Long-term customers usually
+                                    have lower churn rates due to accrued benefits and the inconvenience of switching
+                                    banks.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Account Balance</h3>
+                                <p>The monetary value sitting in the customer's accounts. Customers with higher balances
+                                    may have complex needs yielding either high loyalty or high flight risk if
+                                    unsatisfied.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Number of Products</h3>
+                                <p>How many different bank products (loans, credit cards, savings, checking) the
+                                    customer uses. More products indicate a deeper relationship, making churn less
+                                    likely.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Estimated Salary</h3>
+                                <p>The customer's estimated annual income. Helps segment customers and understand if
+                                    financial health correlates with their likelihood to leave the bank.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Has Credit Card</h3>
+                                <p>Whether the customer holds a credit card with the bank. Credit cards increase
+                                    stickiness and integration with the bank's ecosystem.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3>Active Member</h3>
+                                <p>Indicates if the customer frequently logs in, makes transactions, or interacts with
+                                    the bank. Active members are generally much less likely to churn.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- About Tab -->
+                <div id="tab-about" class="tab-content">
+                    <section class="card slide-in-up">
+                        <h2><i class="fas fa-info-circle"></i> About the Project</h2>
+                        <p class="section-desc">Customer Churn Bank is an advanced machine learning project designed to
+                            predict customer retention and help banks proactively manage their clientele.</p>
+
+                        <h3 class="dev-title">Meet the Developers</h3>
+                        <div class="dev-grid">
+                            <div class="dev-card">
+                                <div class="dev-avatar" title="Update the src attribute with your file path">
+                                    <img src="avatars/Kartik.jpg" alt="Kartik Kumar">
+                                </div>
+                                <h4>Kartik Kumar</h4>
+                                <div class="social-links">
+                                    <a href="https://github.com/Kartik-Kumar9" target="_blank" class="github-link"><i
+                                            class="fab fa-github"></i> GitHub</a>
+                                    <a href="https://www.linkedin.com/in/kartik-kumar-89a19a3a7/" target="_blank"
+                                        class="linkedin-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                                </div>
+                            </div>
+                            <div class="dev-card">
+                                <div class="dev-avatar" title="Update the src attribute with your file path">
+                                    <img src="nishant-photo.jpg" alt="Nishant Sharma"
+                                        onerror="this.outerHTML='<i class=\'fas fa-user-tie\'></i>'">
+                                </div>
+                                <h4>Nishant Sharma</h4>
+                                <div class="social-links">
+                                    <a href="https://github.com/noob-999" target="_blank" class="github-link"><i
+                                            class="fab fa-github"></i> GitHub</a>
+                                    <a href="https://www.linkedin.com/in/nishant-kumar-sharma-3915052b2/"
+                                        target="_blank" class="linkedin-link"><i class="fab fa-linkedin"></i>
+                                        LinkedIn</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div> <!-- End tab-left-pane -->
+
+            <div class="dashboard-right-pane" id="dashboard-pane">
+                <!-- Dashboard / Insights -->
+                <section class="dashboard-section slide-in-up" style="animation-delay: 0.1s;">
+                    <!-- Metrics -->
+                    <div class="card metrics-card hidden" id="model-metrics">
+                        <div class="card-header">
+                            <h2><i class="fas fa-brain"></i> Model Intelligence</h2>
+                            <span class="live-dot">Model Active</span>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-icon"><i class="fas fa-asterisk"></i></div>
+                                <div class="metric-data">
+                                    <span class="label">Best Model</span>
+                                    <span class="value" id="val-best-model">-</span>
+                                </div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-icon"><i class="fas fa-bullseye"></i></div>
+                                <div class="metric-data">
+                                    <span class="label">ROC AUC</span>
+                                    <span class="value" id="val-roc">-</span>
+                                </div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-icon"><i class="fas fa-check-double"></i></div>
+                                <div class="metric-data">
+                                    <span class="label">F1 Score</span>
+                                    <span class="value" id="val-f1">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts-wrapper hidden" id="charts-wrapper">
+                        <div class="card chart-card">
+                            <h2>Feature Importance</h2>
+                            <p class="chart-desc">Which customer attributes drive churn most?</p>
+                            <div class="chart-container">
+                                <canvas id="featureChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="card chart-card">
+                            <h2>Model Performance</h2>
+                            <p class="chart-desc">Comparison of different ML models trained on the dataset</p>
+                            <div class="chart-container">
+                                <canvas id="modelChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <p> &bull; Customer Churn Bank Project by Kartik Kumar and Nishant Sharma</p>
+        </footer>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
