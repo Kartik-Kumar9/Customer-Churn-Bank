@@ -13,6 +13,7 @@ Deployment : https://churnsight.onrender.com
 5. [Machine Learning Pipeline](#machine-learning-pipeline)
 6. [System Architecture & Directory Structure](#system-architecture--directory-structure)
 7. [Installation and Setup](#installation-and-setup)
+8. [UI Overview](#UI-Overview)
 9. [Model Evaluation and Visualizations](#model-evaluation-and-visualizations)
 10. [Technologies Used](#technologies-used)
 11. [Future Roadmap](#future-roadmap)
@@ -114,6 +115,8 @@ Our robust data pipeline consists of several meticulously engineered stages:
    ```
 
 ## UI Overview   
+![UI-1](plots/UI-1.png)<br>
+![UI-2](plots/UI-2.png)<br>
 
 ## Model Evaluation and Visualizations
 
