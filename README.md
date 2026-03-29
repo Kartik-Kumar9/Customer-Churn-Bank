@@ -13,7 +13,6 @@ Deployment : https://churnsight.onrender.com
 5. [Machine Learning Pipeline](#machine-learning-pipeline)
 6. [System Architecture & Directory Structure](#system-architecture--directory-structure)
 7. [Installation and Setup](#installation-and-setup)
-8. [API Reference & Usage](#api-reference--usage)
 9. [Model Evaluation and Visualizations](#model-evaluation-and-visualizations)
 10. [Technologies Used](#technologies-used)
 11. [Future Roadmap](#future-roadmap)
@@ -50,6 +49,7 @@ The model is trained on a robust bank customer dataset. Key features analyzed by
 - `IsActiveMember`: Binary indicator of the customer's active status.
 - `EstimatedSalary`: The customer's estimated annual salary.
 - `Exited` **(Target Variable)**: Binary indicator denoting if the customer churned (1) or stayed (0).
+Link : https://www.kaggle.com/datasets/radheshyamkollipara/bank-customer-churn
 
 ## Machine Learning Pipeline
 Our robust data pipeline consists of several meticulously engineered stages:
@@ -62,7 +62,7 @@ Our robust data pipeline consists of several meticulously engineered stages:
 
 ## System Architecture & Directory Structure
 ```text
-C:\PROJECTS\Customer Churn Bank\
+...\Customer Churn Bank\
 ├── main.py                    # Core FastAPI application serving REST endpoints
 ├── requirements.txt           # Exhaustive list of Python dependencies
 ├── Backend/
@@ -112,18 +112,9 @@ C:\PROJECTS\Customer Churn Bank\
    uvicorn main:app --host 127.0.0.1 --port 8000 --reload
    ```
 
-## API Reference & Usage
-
-Once the server is completely initialized, the application offers two primary avenues of interaction:
-
-- **Interactive Web Interface:** 
-  Navigate to `http://127.0.0.1:8000/` in any modern web browser to access the frontend application. Users can manually input client data to receive instantaneous churn predictions.
-
-- **Developer API Documentation:** 
-  FastAPI automatically generates interactive Swagger UI documentation. Navigate to `http://127.0.0.1:8000/docs` to test endpoints, view request/response schemas, and integrate the API into third-party architectures.
+## UI Overview   
 
 ## Model Evaluation and Visualizations
-Throughout the machine learning pipeline, various classification models were rigorously evaluated against a hold-out test set to identify the absolute optimal solution. 
 
 ### 1. Model Comparisons
 This comparison balances key evaluation metrics, placing special emphasis on the F1 score, precision, and recall rather than mere structural accuracy, ensuring robustness against imbalanced classes.
