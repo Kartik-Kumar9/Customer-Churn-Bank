@@ -48,7 +48,8 @@ The model is trained on a robust bank customer dataset. Key features analyzed by
 - `HasCrCard`: Binary indicator of whether the customer possesses a credit card.
 - `IsActiveMember`: Binary indicator of the customer's active status.
 - `EstimatedSalary`: The customer's estimated annual salary.
-- `Exited` **(Target Variable)**: Binary indicator denoting if the customer churned (1) or stayed (0).
+- `Exited` **(Target Variable)**: Binary indicator denoting if the customer churned (1) or stayed (0).<br>
+
 Link : https://www.kaggle.com/datasets/radheshyamkollipara/bank-customer-churn
 
 ## Machine Learning Pipeline
