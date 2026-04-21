@@ -9,11 +9,11 @@ Deployment : https://churnsight.onrender.com
 1. [Executive Summary](#executive-summary)
 2. [Business Use Case](#business-use-case)
 3. [Key Features](#key-features)
-4. [Dataset Overview](#dataset-overview)
-5. [Machine Learning Pipeline](#machine-learning-pipeline)
-6. [System Architecture & Directory Structure](#system-architecture--directory-structure)
-7. [Installation and Setup](#installation-and-setup)
-8. [UI Overview](#UI-Overview)
+4. [UI Overview](#UI-Overview)
+5. [Dataset Overview](#dataset-overview)
+6. [Machine Learning Pipeline](#machine-learning-pipeline)
+7. [System Architecture & Directory Structure](#system-architecture--directory-structure)
+8. [Installation and Setup](#installation-and-setup)
 9. [Model Evaluation and Visualizations](#model-evaluation-and-visualizations)
 10. [Technologies Used](#technologies-used)
 11. [Future Roadmap](#future-roadmap)
@@ -37,6 +37,10 @@ In the modern banking sector, churn prediction models act as an essential risk m
 - **RESTful API Backend:** A scalable, asynchronous API built with FastAPI that processes incoming customer profiles and returns real-time churn probabilities and risk classifications using the user-selected model.
 - **Interactive Live Dashboard:** A modern, intuitively designed real-time dashboard featuring dynamic donut gauge risk meters, predictive radar charts, and categorized churn risk levels to enable swift decision-making.
 - **Interactive Model Insights:** A dedicated "Insights" section allowing users to visually explore dynamic model performance metrics (ROC, F1, Accuracy) and dive into interactive feature importance charts that explain exactly why certain customers exhibit higher churn risk.
+
+## UI Overview   
+![UI-1](plots/UI-1.png)<br>
+![UI-2](plots/UI-2.png)<br>
 
 ## Dataset Overview
 The model is trained on a robust bank customer dataset. Key features analyzed by the machine learning models include:
@@ -115,9 +119,6 @@ Our robust data pipeline consists of several meticulously engineered stages:
    uvicorn main:app --host 127.0.0.1 --port 8000 --reload
    ```
 
-## UI Overview   
-![UI-1](plots/UI-1.png)<br>
-![UI-2](plots/UI-2.png)<br>
 
 ## Model Evaluation and Visualizations
 
