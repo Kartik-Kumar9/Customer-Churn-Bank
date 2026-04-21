@@ -4,3 +4,7 @@ pandas
 numpy
 scikit-learn
 joblib
+xgboost
+lightgbm
+catboost
+plotly
