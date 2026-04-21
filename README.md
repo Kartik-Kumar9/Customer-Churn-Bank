@@ -39,8 +39,9 @@ In the modern banking sector, churn prediction models act as an essential risk m
 - **Interactive Model Insights:** A dedicated "Insights" section allowing users to visually explore dynamic model performance metrics (ROC, F1, Accuracy) and dive into interactive feature importance charts that explain exactly why certain customers exhibit higher churn risk.
 
 ## UI Overview   
-![UI-1](plots/UI-1.png)<br>
-![UI-2](plots/UI-2.png)<br>
+![UI-1](plots/UI1.png)<br>
+![UI-2](plots/UI2.png)<br>
+![UI-3](plots/UI3.png)<br>
 
 ## Dataset Overview
 The model is trained on a robust bank customer dataset. Key features analyzed by the machine learning models include:
