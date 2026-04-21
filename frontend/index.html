@@ -26,7 +26,7 @@
             </div>
             <nav class="tabs">
                 <button class="tab-btn active" data-tab="tab-predict">Predict</button>
-                <button class="tab-btn" data-tab="tab-features">Features</button>
+                <button class="tab-btn" data-tab="tab-features">Insights</button>
                 <button class="tab-btn" data-tab="tab-about">About</button>
             </nav>
         </header>
@@ -35,175 +35,248 @@
             <p>Predict customer churn risk with high-accuracy machine learning engine</p>
         </div>
 
-        <main>
+        <main class="predict-main">
             <div class="tab-left-pane">
                 <!-- Predict Tab -->
                 <div id="tab-predict" class="tab-content active">
-                    <!-- Prediction Form -->
-                    <section class="card form-section slide-in-up">
-                        <h2><i class="fas fa-user-edit"></i> Customer Profile</h2>
-                        <form id="prediction-form">
-                            <div class="form-grid">
-                                <div class="input-group">
-                                    <label for="credit_score">Credit Score</label>
-                                    <input type="number" id="credit_score" required min="300" max="900"
-                                        placeholder="e.g. 600">
-                                </div>
-                                <div class="input-group">
-                                    <label for="country">Location</label>
-                                    <select id="country" required>
-                                        <option value="" disabled selected>Select country...</option>
-                                        <option value="France">France</option>
-                                        <option value="Germany">Germany</option>
-                                        <option value="Spain">Spain</option>
-                                    </select>
-                                </div>
-                                <div class="input-group">
-                                    <label for="gender">Gender</label>
-                                    <select id="gender" required>
-                                        <option value="" disabled selected>Select gender...</option>
-                                        <option value="1">Male</option>
-                                        <option value="0">Female</option>
-                                    </select>
-                                </div>
-                                <div class="input-group">
-                                    <label for="age">Age</label>
-                                    <input type="number" id="age" required min="18" max="100" placeholder="e.g. 40">
-                                </div>
-                                <div class="input-group">
-                                    <label for="tenure">Tenure (Years)</label>
-                                    <input type="number" id="tenure" required min="0" max="10" placeholder="e.g. 5">
-                                </div>
-                                <div class="input-group">
-                                    <label for="balance">Account Balance ($)</label>
-                                    <input type="number" step="0.01" id="balance" required min="0"
-                                        placeholder="e.g. 50000">
-                                </div>
-                                <div class="input-group">
-                                    <label for="products_number">Number of Products</label>
-                                    <input type="number" id="products_number" required min="1" max="4"
-                                        placeholder="e.g. 1">
-                                </div>
-                                <div class="input-group">
-                                    <label for="estimated_salary">Estimated Salary ($)</label>
-                                    <input type="number" step="0.01" id="estimated_salary" required min="0"
-                                        placeholder="e.g. 60000">
-                                </div>
 
-                                <div class="checkbox-container">
-                                    <label class="custom-checkbox">
-                                        <input type="checkbox" id="credit_card">
-                                        <span class="checkmark"></span>
-                                        Has Credit Card
-                                    </label>
-                                    <label class="custom-checkbox">
-                                        <input type="checkbox" id="active_member">
-                                        <span class="checkmark"></span>
-                                        Active Member
-                                    </label>
+                    <!-- ── TOP ROW: Form + Model Intelligence ── -->
+                    <div class="predict-top-row">
+
+                        <!-- Customer Profile Form Card -->
+                        <section class="card form-section slide-in-up">
+                            <h2><i class="fas fa-user-edit"></i> Customer Profile</h2>
+                            <form id="prediction-form">
+                                <div class="form-grid">
+                                    <div class="input-group">
+                                        <label for="credit_score">Credit Score</label>
+                                        <input type="number" id="credit_score" required min="300" max="900"
+                                            placeholder="e.g. 600">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="country">Location</label>
+                                        <select id="country" required>
+                                            <option value="" disabled selected>Select country...</option>
+                                            <option value="France">France</option>
+                                            <option value="Germany">Germany</option>
+                                            <option value="Spain">Spain</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="gender">Gender</label>
+                                        <select id="gender" required>
+                                            <option value="" disabled selected>Select gender...</option>
+                                            <option value="1">Male</option>
+                                            <option value="0">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="age">Age</label>
+                                        <input type="number" id="age" required min="18" max="100" placeholder="e.g. 40">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="tenure">Tenure (Years)</label>
+                                        <input type="number" id="tenure" required min="0" max="10" placeholder="e.g. 5">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="balance">Account Balance ($)</label>
+                                        <input type="number" step="0.01" id="balance" required min="0"
+                                            placeholder="e.g. 50000">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="products_number">Number of Products</label>
+                                        <input type="number" id="products_number" required min="1" max="4"
+                                            placeholder="e.g. 1">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="estimated_salary">Estimated Salary ($)</label>
+                                        <input type="number" step="0.01" id="estimated_salary" required min="0"
+                                            placeholder="e.g. 60000">
+                                    </div>
+
+                                    <div class="checkbox-container">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" id="credit_card">
+                                            <span class="checkmark"></span>
+                                            Has Credit Card
+                                        </label>
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" id="active_member">
+                                            <span class="checkmark"></span>
+                                            Active Member
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
+
+                        <!-- Model Intelligence Card (inline in predict top row) -->
+                        <div class="card metrics-card" id="model-metrics">
+                            <div class="card-header">
+                                <h2><i class="fas fa-brain"></i> Model Intelligence</h2>
+                                <span class="live-dot">Model Active</span>
+                            </div>
+                            <div class="metrics-grid">
+                                <div class="metric">
+                                    <div class="metric-icon"><i class="fas fa-asterisk"></i></div>
+                                    <div class="metric-data">
+                                        <span class="label">Best Model</span>
+                                        <span class="value" id="val-best-model">-</span>
+                                    </div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-icon"><i class="fas fa-bullseye"></i></div>
+                                    <div class="metric-data">
+                                        <span class="label">ROC AUC</span>
+                                        <span class="value" id="val-roc">-</span>
+                                    </div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-icon"><i class="fas fa-check-double"></i></div>
+                                    <div class="metric-data">
+                                        <span class="label">F1 Score</span>
+                                        <span class="value" id="val-f1">-</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-actions">
-                                <button type="submit" class="btn-primary" id="predict-btn">
-                                    <span>Analyze Risk</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                            <!-- Model Selector -->
+                            <div class="model-selector-row">
+                                <label for="model-select"><i class="fas fa-microchip"></i> Active Model</label>
+                                <select id="model-select">
+                                    <option value="Gradient Boosting">Gradient Boosting</option>
+                                </select>
                             </div>
 
-                            <div id="loading" class="hidden">
-                                <div class="spinner"></div>
-                                <span>Processing with AI...</span>
-                            </div>
-                        </form>
-
-                        <!-- Prediction Result -->
-                        <div id="result-container" class="hidden fade-in">
-                            <div class="result-card" id="result-card-inner">
-                                <h3>Prediction Result</h3>
-                                <div class="risk-circle" id="risk-circle">
-                                    <span id="prob-value">0%</span>
+                            <!-- Selected Model Stats -->
+                            <div class="metrics-grid" id="selected-model-stats" style="margin-top: 1rem;">
+                                <div class="metric">
+                                    <div class="metric-icon"><i class="fas fa-chart-line"></i></div>
+                                    <div class="metric-data">
+                                        <span class="label">ROC AUC</span>
+                                        <span class="value" id="sel-roc">-</span>
+                                    </div>
                                 </div>
-                                <div class="risk-badge" id="risk-badge">Unknown</div>
-                                <p class="prediction-text" id="prediction-text">Analysis complete.</p>
-
-                                <!-- Local Customer Risk Chart -->
-                                <div class="chart-container"
-                                    style="height: 250px; margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
-                                    <canvas id="localRadarChart"></canvas>
+                                <div class="metric">
+                                    <div class="metric-icon"><i class="fas fa-check-double"></i></div>
+                                    <div class="metric-data">
+                                        <span class="label">F1 Score</span>
+                                        <span class="value" id="sel-f1">-</span>
+                                    </div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-icon"><i class="fas fa-bullseye"></i></div>
+                                    <div class="metric-data">
+                                        <span class="label">Accuracy</span>
+                                        <span class="value" id="sel-acc">-</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
+
+                    </div> <!-- end .predict-top-row -->
+
+                    <!-- ── ANALYZE RISK BUTTON (full-width) ── -->
+                    <div class="predict-action-row">
+                        <button type="submit" form="prediction-form" class="btn-primary btn-analyze" id="predict-btn">
+                            <span>Analyze Risk</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <div id="loading" class="hidden">
+                            <div class="spinner"></div>
+                            <span>Processing with AI...</span>
+                        </div>
+                    </div>
+
+                    <!-- ── RESULTS ROW (3 columns, hidden until prediction) ── -->
+                    <div id="result-container" class="predict-results-row hidden fade-in">
+
+                        <!-- Column 1: Risk Gauge -->
+                        <div class="card result-col result-col-gauge">
+                            <h3 class="result-col-title">Risk Gauge</h3>
+                            <div class="gauge-wrapper">
+                                <canvas id="gaugeDonut" width="200" height="200"></canvas>
+                                <div class="gauge-center">
+                                    <span id="prob-value" class="gauge-prob">0%</span>
+                                    <span class="gauge-label">Churn Risk</span>
+                                </div>
+                            </div>
+                            <div class="risk-badge" id="risk-badge">Unknown</div>
+                        </div>
+
+                        <!-- Column 2: Key Stats + Action Panel -->
+                        <div class="card result-col result-col-stats">
+                            <h3 class="result-col-title">Key Stats</h3>
+                            <div class="key-stats-grid">
+                                <div class="key-stat-item">
+                                    <span class="key-stat-label">Probability</span>
+                                    <span class="key-stat-value" id="stat-probability">—</span>
+                                </div>
+                                <div class="key-stat-item">
+                                    <span class="key-stat-label">Risk Level</span>
+                                    <span class="key-stat-value" id="stat-risk-level">—</span>
+                                </div>
+                                <div class="key-stat-item">
+                                    <span class="key-stat-label">Model Used</span>
+                                    <span class="key-stat-value" id="stat-model-used">—</span>
+                                </div>
+                            </div>
+                            <div class="risk-action-panel" id="risk-action-panel">
+                                <div class="action-panel-icon" id="action-panel-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <p class="action-panel-heading" id="action-panel-heading">Action Required</p>
+                                    <p class="prediction-text" id="prediction-text">Analysis complete.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 3: Radar Chart -->
+                        <div class="card result-col result-col-radar">
+                            <h3 class="result-col-title">Profile Radar</h3>
+                            <div class="chart-container radar-chart-container">
+                                <canvas id="localRadarChart"></canvas>
+                            </div>
+                        </div>
+
+                    </div> <!-- end .predict-results-row -->
 
                 </div>
 
                 <!-- Features Tab -->
                 <div id="tab-features" class="tab-content">
-                    <section class="card slide-in-up">
-                        <h2><i class="fas fa-list-alt"></i> Model Features Explained</h2>
-                        <p class="section-desc">Understanding the data points used to evaluate customer churn risk.</p>
-
-                        <div class="features-list">
-                            <div class="feature-item">
-                                <h3>Credit Score</h3>
-                                <p>A numerical expression based on a level analysis of a person's credit files,
-                                    representing the creditworthiness of an individual. A higher score typically
-                                    indicates lower churn risk as financially stable customers tend to be more loyal.
-                                </p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Location</h3>
-                                <p>The country where the customer resides. Significant demographic or economic
-                                    differences between countries can influence overall banking satisfaction and
-                                    available alternatives.</p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Gender</h3>
-                                <p>The gender of the customer. Used as a demographic variable to understand if churn
-                                    patterns vary between male and female customer segments.</p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Age</h3>
-                                <p>Customer's age in years. Older customers generally have more stable banking
-                                    relationships, whereas younger customers might be more likely to switch for better
-                                    offers.</p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Tenure</h3>
-                                <p>The number of years the customer has been with the bank. Long-term customers usually
-                                    have lower churn rates due to accrued benefits and the inconvenience of switching
-                                    banks.</p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Account Balance</h3>
-                                <p>The monetary value sitting in the customer's accounts. Customers with higher balances
-                                    may have complex needs yielding either high loyalty or high flight risk if
-                                    unsatisfied.</p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Number of Products</h3>
-                                <p>How many different bank products (loans, credit cards, savings, checking) the
-                                    customer uses. More products indicate a deeper relationship, making churn less
-                                    likely.</p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Estimated Salary</h3>
-                                <p>The customer's estimated annual income. Helps segment customers and understand if
-                                    financial health correlates with their likelihood to leave the bank.</p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Has Credit Card</h3>
-                                <p>Whether the customer holds a credit card with the bank. Credit cards increase
-                                    stickiness and integration with the bank's ecosystem.</p>
-                            </div>
-                            <div class="feature-item">
-                                <h3>Active Member</h3>
-                                <p>Indicates if the customer frequently logs in, makes transactions, or interacts with
-                                    the bank. Active members are generally much less likely to churn.</p>
-                            </div>
+                    <!-- Model Performance -->
+                    <div class="card chart-card slide-in-up" style="animation-delay: 0.15s;">
+                        <h2>Model Performance</h2>
+                        <p class="chart-desc">Comparison of different ML models trained on the dataset</p>
+                        <div class="metric-pills">
+                            <button class="metric-pill active" data-metric="roc_auc">ROC AUC</button>
+                            <button class="metric-pill" data-metric="f1">F1 Score</button>
+                            <button class="metric-pill" data-metric="accuracy">Accuracy</button>
+                            <button class="metric-pill" data-metric="precision">Precision</button>
+                            <button class="metric-pill" data-metric="recall">Recall</button>
                         </div>
-                    </section>
+                        <div class="model-perf-body">
+                            <div class="chart-container model-perf-chart">
+                                <canvas id="modelChart"></canvas>
+                            </div>
+                            <div class="metric-desc-panel" id="metric-desc-panel"></div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Importance -->
+                    <div class="card chart-card slide-in-up" style="animation-delay: 0.3s;">
+                        <h2><i class="fas fa-chart-bar"></i> Feature Importance</h2>
+                        <p class="chart-desc">Click a feature label to learn how it affects churn</p>
+                        <div class="model-perf-body feat-imp-body">
+                            <div class="feat-pills-col" id="feature-pills-col"></div>
+                            <div class="chart-container model-perf-chart feat-imp-chart">
+                                <canvas id="featureChart"></canvas>
+                            </div>
+                            <div class="metric-desc-panel" id="feature-desc-panel"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- About Tab -->
@@ -216,9 +289,6 @@
                         <h3 class="dev-title">Meet the Developers</h3>
                         <div class="dev-grid">
                             <div class="dev-card">
-                                <div class="dev-avatar" title="Update the src attribute with your file path">
-                                    <img src="avatars/Kartik.jpg" alt="Kartik Kumar">
-                                </div>
                                 <h4>Kartik Kumar</h4>
                                 <div class="social-links">
                                     <a href="https://github.com/Kartik-Kumar9" target="_blank" class="github-link"><i
@@ -228,10 +298,6 @@
                                 </div>
                             </div>
                             <div class="dev-card">
-                                <div class="dev-avatar" title="Update the src attribute with your file path">
-                                    <img src="nishant-photo.jpg" alt="Nishant Sharma"
-                                        onerror="this.outerHTML='<i class=\'fas fa-user-tie\'></i>'">
-                                </div>
                                 <h4>Nishant Sharma</h4>
                                 <div class="social-links">
                                     <a href="https://github.com/noob-999" target="_blank" class="github-link"><i
@@ -246,59 +312,10 @@
                 </div>
             </div> <!-- End tab-left-pane -->
 
-            <div class="dashboard-right-pane" id="dashboard-pane">
-                <!-- Dashboard / Insights -->
-                <section class="dashboard-section slide-in-up" style="animation-delay: 0.1s;">
-                    <!-- Metrics -->
-                    <div class="card metrics-card hidden" id="model-metrics">
-                        <div class="card-header">
-                            <h2><i class="fas fa-brain"></i> Model Intelligence</h2>
-                            <span class="live-dot">Model Active</span>
-                        </div>
-                        <div class="metrics-grid">
-                            <div class="metric">
-                                <div class="metric-icon"><i class="fas fa-asterisk"></i></div>
-                                <div class="metric-data">
-                                    <span class="label">Best Model</span>
-                                    <span class="value" id="val-best-model">-</span>
-                                </div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-icon"><i class="fas fa-bullseye"></i></div>
-                                <div class="metric-data">
-                                    <span class="label">ROC AUC</span>
-                                    <span class="value" id="val-roc">-</span>
-                                </div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-icon"><i class="fas fa-check-double"></i></div>
-                                <div class="metric-data">
-                                    <span class="label">F1 Score</span>
-                                    <span class="value" id="val-f1">-</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Charts -->
-                    <div class="charts-wrapper hidden" id="charts-wrapper">
-                        <div class="card chart-card">
-                            <h2>Feature Importance</h2>
-                            <p class="chart-desc">Which customer attributes drive churn most?</p>
-                            <div class="chart-container">
-                                <canvas id="featureChart"></canvas>
-                            </div>
-                        </div>
-                        <div class="card chart-card">
-                            <h2>Model Performance</h2>
-                            <p class="chart-desc">Comparison of different ML models trained on the dataset</p>
-                            <div class="chart-container">
-                                <canvas id="modelChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
+            <!-- Charts wrapper kept for JS compatibility -->
+            <div class="charts-wrapper hidden" id="charts-wrapper"></div>
+            <!-- Dashboard pane hidden div for JS compatibility -->
+            <div id="dashboard-pane" class="hidden"></div>
         </main>
 
         <footer>

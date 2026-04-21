@@ -33,9 +33,10 @@ In the modern banking sector, churn prediction models act as an essential risk m
 ## Key Features
 - **Exploratory Data Analysis (EDA):** Deep-dive statistical insights into the underlying dataset, illuminating feature distributions, correlations, and target variable imbalances.
 - **Advanced Predictive Modeling:** Extensive evaluation and hyperparameter tuning across multiple state-of-the-art classification algorithms, including Logistic Regression, Random Forest, Support Vector Machines (SVM), XGBoost, LightGBM, CatBoost, and customized Voting Ensembles.
-- **RESTful API Backend:** A scalable, asynchronous API built with FastAPI that processes incoming customer profiles and returns real-time churn probabilities and risk classifications.
-- **Interactive Web Interface:** A modern, intuitively designed user interface that communicates seamlessly with the API, providing visual feedback and risk assessments instantaneously.
-- **Comprehensive Evaluation Suite:** Automated generation of vital model assessment metrics, visually represented through Receiver Operating Characteristic (ROC) curves, Precision-Recall curves, confusion matrices, and feature importance bar charts.
+- **Dynamic Model Selection:** Switch between different machine learning models directly from the frontend to compare real-time prediction results based on different algorithms.
+- **RESTful API Backend:** A scalable, asynchronous API built with FastAPI that processes incoming customer profiles and returns real-time churn probabilities and risk classifications using the user-selected model.
+- **Interactive Live Dashboard:** A modern, intuitively designed real-time dashboard featuring dynamic donut gauge risk meters, predictive radar charts, and categorized churn risk levels to enable swift decision-making.
+- **Interactive Model Insights:** A dedicated "Insights" section allowing users to visually explore dynamic model performance metrics (ROC, F1, Accuracy) and dive into interactive feature importance charts that explain exactly why certain customers exhibit higher churn risk.
 
 ## Dataset Overview
 The model is trained on a robust bank customer dataset. Key features analyzed by the machine learning models include:
@@ -68,10 +69,10 @@ Our robust data pipeline consists of several meticulously engineered stages:
 ├── main.py                    # Core FastAPI application serving REST endpoints
 ├── requirements.txt           # Exhaustive list of Python dependencies
 ├── Backend/
-│   └── model/                 # Serialized joblib artifacts (churn_model.pkl, scaler.pkl, etc.)
+│   └── model/                 # Serialized joblib artifacts for diverse modeling (gradient_boosting.pkl, random_forest.pkl, scaler.pkl, etc.)
 ├── Dataset/                   # Raw CSV datasets and processed training subsets
 ├── frontend/                  # Web interface assets (HTML5, CSS3, Vanilla JS, images)
-├── noteboook/                 # Jupyter Notebooks containing the EDA and Modeling pipelines
+├── notebook/                  # Jupyter Notebooks containing the EDA and Modeling pipelines
 └── plots/                     # Auto-generated PNG visualizations from the evaluation phase
 ```
 

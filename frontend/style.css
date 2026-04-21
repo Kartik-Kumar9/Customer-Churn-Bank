@@ -54,7 +54,6 @@ body {
     margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
-    animation: fadeInDown 0.6s ease-out;
 }
 
 @media (max-width: 768px) {
@@ -100,20 +99,26 @@ body {
     margin-bottom: 2.5rem;
     color: var(--text-secondary);
     font-size: 1.1rem;
-    animation: fadeInDown 0.8s ease-out;
 }
 
-/* Layout */
-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+/* Layout - new predict-main is full-width, no right pane */
+main.predict-main {
+    display: block;
+}
+
+.tab-left-pane {
+    width: 100%;
 }
 
 @media (max-width: 900px) {
-    main {
-        grid-template-columns: 1fr;
+    main.predict-main {
+        display: block;
     }
+}
+
+/* Features/About tab - tab-left-pane takes full width (dashboard-pane hidden) */
+.tab-left-pane.full-width {
+    width: 100%;
 }
 
 /* Cards (Professional) */
@@ -318,10 +323,216 @@ select option {
 }
 
 /* Prediction Result */
+/* ── Predict tab layout ── */
+.predict-top-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .predict-top-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.predict-action-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.btn-analyze {
+    max-width: 480px;
+    width: 100%;
+}
+
+/* ── Predict results row (3 columns) ── */
+.predict-results-row {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.5fr;
+    gap: 1.5rem;
+    align-items: start;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .predict-results-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.result-col-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.result-col-title i {
+    color: var(--accent-primary);
+}
+
+/* Gauge column */
+.result-col-gauge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.gauge-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0.5rem auto 1rem auto;
+}
+
+.gauge-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.gauge-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.gauge-prob {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.gauge-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.25rem;
+}
+
+/* Key stats column */
+.key-stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.key-stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.key-stat-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.key-stat-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Risk action panel */
+.risk-action-panel {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    margin-top: 0.5rem;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.risk-action-panel.panel-danger {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.25);
+}
+
+.risk-action-panel.panel-warning {
+    background: rgba(245, 158, 11, 0.05);
+    border-color: rgba(245, 158, 11, 0.25);
+}
+
+.risk-action-panel.panel-success {
+    background: rgba(16, 185, 129, 0.05);
+    border-color: rgba(16, 185, 129, 0.25);
+}
+
+.action-panel-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--danger);
+    transition: background 0.3s, color 0.3s;
+}
+
+.action-panel-icon.icon-warning {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--warning);
+}
+
+.action-panel-icon.icon-success {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--success);
+}
+
+.action-panel-heading {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+/* Radar result column */
+.radar-chart-container {
+    height: 220px;
+}
+
 #result-container {
-    margin-top: 2rem;
-    border-top: 1px solid var(--border-color);
-    padding-top: 2rem;
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
 }
 
 .result-card {
@@ -560,11 +771,12 @@ footer {
 
 .tab-content {
     display: none;
-    animation: fadeIn 0.4s ease-out forwards;
 }
 
 .tab-content.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 /* Features List */
@@ -766,9 +978,188 @@ footer {
 }
 
 .slide-in-up {
-    animation: fadeInUp 0.5s ease-out forwards;
+    /* animation removed */
 }
 
 .fade-in {
-    animation: fadeInUp 0.3s ease-out forwards;
+    /* animation removed */
+}
+
+/* Model Selector Row */
+.model-selector-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.model-selector-row label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.model-selector-row select {
+    flex: 1;
+}
+
+/* Metric Pill Buttons */
+.metric-pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.metric-pill {
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.metric-pill:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.metric-pill.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* ── Model Performance split layout ── */
+.model-perf-body {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.model-perf-chart {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 400px;
+    transition: flex 0.35s ease;
+}
+
+/* Description panel */
+.metric-desc-panel {
+    flex: 0 0 0;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: flex 0.35s ease, opacity 0.3s ease 0.1s, width 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.75rem;
+}
+
+.metric-desc-panel.visible {
+    flex: 0 0 230px;
+    width: 230px;
+    opacity: 1;
+}
+
+.metric-desc-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.metric-desc-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.metric-desc-body {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+/* Feature importance chart — taller to fit thicker bars */
+.feat-imp-chart {
+    height: 340px;
+}
+
+/* Effect badge in feature description panel */
+.feat-effect-badge {
+    display: inline-block;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    border: 1px solid;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Feature pill buttons column (replaces y-axis labels) */
+.feat-imp-body {
+    align-items: stretch;
+}
+
+.feat-pills-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    width: 140px;
+    padding-bottom: 28px; /* offset for x-axis ticks */
+}
+
+.feat-axis-pill {
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    border: 1.5px solid var(--pill-color, #64748b);
+    background: transparent;
+    color: var(--pill-color, #64748b);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: right;
+    font-family: inherit;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.feat-axis-pill:hover {
+    background: color-mix(in srgb, var(--pill-color, #64748b) 10%, transparent);
+}
+
+.feat-axis-pill.active {
+    background: var(--pill-color, #64748b);
+    color: #fff;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--pill-color, #64748b) 40%, transparent);
 }

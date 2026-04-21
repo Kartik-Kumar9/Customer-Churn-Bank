@@ -17,8 +17,33 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, "Backend", "model")
 STATIC_DIR = os.path.join(BASE_DIR, "frontend")
 
-# ─── Load artefacts once at startup ──────────────────────────────────────────
-model = joblib.load(os.path.join(MODEL_DIR, "churn_model.pkl"))
+# ─── Map display name → pkl filename ─────────────────────────────────────────
+MODEL_FILE_MAP = {
+    "Logistic Regression": "logistic_regression.pkl",
+    "Random Forest":       "random_forest.pkl",
+    "Gradient Boosting":   "gradient_boosting.pkl",
+    "SVM":                 "svm.pkl",
+    "XGBoost":             "xgboost.pkl",
+    "LightGBM":            "lightgbm.pkl",
+    "CatBoost":            "catboost.pkl",
+    "Voting Ensemble":     "voting_ensemble.pkl",
+}
+
+# ─── Load all available models at startup ────────────────────────────────────
+AVAILABLE_MODELS: dict = {}
+for display_name, file_name in MODEL_FILE_MAP.items():
+    path = os.path.join(MODEL_DIR, file_name)
+    if os.path.exists(path):
+        AVAILABLE_MODELS[display_name] = joblib.load(path)
+
+# Fall back to legacy churn_model.pkl if no individual files exist yet
+if not AVAILABLE_MODELS:
+    _fallback = os.path.join(MODEL_DIR, "churn_model.pkl")
+    if os.path.exists(_fallback):
+        AVAILABLE_MODELS["Gradient Boosting"] = joblib.load(_fallback)
+
+DEFAULT_MODEL = "Gradient Boosting"
+
 scaler = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
 feature_columns = joblib.load(os.path.join(MODEL_DIR, "feature_columns.pkl"))
 
@@ -38,12 +63,13 @@ TRAINING_RESULTS = [
 
 # ─── Feature importance (from Gradient Boosting model) ──────────────────────
 try:
-    importances = model.feature_importances_
+    _gb = AVAILABLE_MODELS.get("Gradient Boosting")
+    importances = _gb.feature_importances_
     FEATURE_IMPORTANCE = [
         {"feature": feat, "importance": round(float(imp), 4)}
         for feat, imp in sorted(zip(feature_columns, importances), key=lambda x: x[1], reverse=True)
     ]
-except AttributeError:
+except (AttributeError, TypeError):
     FEATURE_IMPORTANCE = []
 
 
@@ -59,12 +85,14 @@ class PredictionRequest(BaseModel):
     active_member: int = Field(..., ge=0, le=1, description="Is active member (0/1)")
     estimated_salary: float = Field(..., ge=0, description="Estimated salary")
     country: str = Field(..., description="Country: France, Germany, or Spain")
+    model_name: str = Field(default=DEFAULT_MODEL, description="Model to use for prediction")
 
 
 class PredictionResponse(BaseModel):
     churn_probability: float
     prediction: str
     risk_level: str
+    model_used: str
 
 
 # ─── App ─────────────────────────────────────────────────────────────────────
@@ -85,6 +113,10 @@ async def predict(req: PredictionRequest):
     country = req.country.strip().title()
     if country not in ("France", "Germany", "Spain"):
         raise HTTPException(status_code=422, detail="Country must be France, Germany, or Spain")
+
+    # Resolve model
+    model_name = req.model_name if req.model_name in AVAILABLE_MODELS else DEFAULT_MODEL
+    selected_model = AVAILABLE_MODELS[model_name]
 
     # Build a single-row DataFrame that mirrors training columns
     row = {
@@ -109,8 +141,8 @@ async def predict(req: PredictionRequest):
     # Scale numeric columns
     df[NUM_COLS] = scaler.transform(df[NUM_COLS])
 
-    # Predict
-    proba = float(model.predict_proba(df)[0, 1])
+    # Predict with selected model
+    proba = float(selected_model.predict_proba(df)[0, 1])
     prediction = "Churned" if proba >= 0.5 else "Stayed"
 
     if proba >= 0.7:
@@ -124,7 +156,14 @@ async def predict(req: PredictionRequest):
         churn_probability=round(proba, 4),
         prediction=prediction,
         risk_level=risk,
+        model_used=model_name,
     )
+
+
+@app.get("/api/models")
+async def list_models():
+    """Return list of available models."""
+    return {"models": list(AVAILABLE_MODELS.keys())}
 
 
 @app.get("/api/model-info")
